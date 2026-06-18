@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Margin-Guard // Enterprise Revenue Leakage Tracker</title>
+    <!-- Linking CSS file -->
+    <link rel="stylesheet" href="appstyle.css">
+</head>
+<body>
+
+    <!-- Application Top Bar -->
+    <header class="app-header">
+        <div class="brand">
+            <span class="logo-icon">🛡️</span>
+            <h1>MarginGuard <span class="badge-tag">Fixed-Price Mode</span></h1>
+        </div>
+        <div class="project-selector-zone">
+            <label for="project-selector">Active Contract:</label>
+            <select id="project-selector">
+                <option value="proj-101">Enterprise Mobile App ($30,000 Contract)</option>
+                <option value="proj-102">SaaS Dashboard Replatform ($15,000 Contract)</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Grid Layout -->
+    <main class="dashboard-layout">
+        
+        <!-- TOP SECTION: Real-Time Analytics Panel -->
+        <section class="analytics-panel" id="analytics-dashboard">
+            
+            <!-- Financial Profit Margin Card (The Primary Health Indicator) -->
+            <div class="metric-card highlight-metric" id="margin-card">
+                <h3>Gross Profit Margin</h3>
+                <div class="metric-value" id="live-margin-percentage">100%</div>
+                <p class="metric-subtitle" id="margin-status-text">Healthy / Full Allocation</p>
+            </div>
+
+            <!-- Contract Burn Rate Card -->
+            <div class="metric-card">
+                <h3>Total Contract Budget</h3>
+                <div class="metric-value" id="contract-revenue-display">$30,000</div>
+                <p class="metric-subtitle">Fixed Baseline Value</p>
+            </div>
+
+            <!-- Total Accrued Operational Labor Cost Card -->
+            <div class="metric-card" id="operational-cost-card">
+                <h3>Accrued Labor Cost</h3>
+                <div class="metric-value text-danger" id="total-labor-cost">$0</div>
+                <p class="metric-subtitle" id="hours-consumed-count">0 total hours logged</p>
+            </div>
+
+            <!-- Scope Creep Alert Card -->
+            <div class="metric-card" id="scope-creep-card">
+                <h3>Unbilled Scope Creep</h3>
+                <div class="metric-value text-warning" id="creep-cost-display">$0</div>
+                <p class="metric-subtitle" id="creep-hours-count">0 hours outside contract</p>
+            </div>
+
+        </section>
+
+        <!-- MIDDLE SECTION: Early Warning System Indicator Banner -->
+        <div class="warning-banner-system" id="early-warning-banner">
+            <div class="banner-status-icon">✅</div>
+            <div class="banner-text">
+                <h4>System Status: Optimized</h4>
+                <p>Operational costs are within bounds. No critical project resource leakage detected.</p>
+            </div>
+        </div>
+
+        <!-- BOTTOM SECTION: Two-Column Workspace Layout -->
+        <div class="workspace-grid">
+            
+            <!-- Left Side: Interactive Work Logging Panel -->
+            <section class="logging-panel">
+                <div class="panel-header">
+                    <h2>Log Team Resource Hours</h2>
+                </div>
+
+                <form id="resource-log-form">
+                    <!-- Form Row 1: Employee Metadata -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="employee-rate">Internal Hourly Cost Rate ($/hr)</label>
+                            <input type="number" id="employee-rate" min="1" placeholder="e.g., 25" required>
+                            <span class="field-help">What the agency pays the developer per hour.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="hours-worked">Hours Expended</label>
+                            <input type="number" id="hours-worked" min="1" step="0.5" placeholder="e.g., 8" required>
+                            <span class="field-help">Actual time spent on this specific run.</span>
+                        </div>
+                    </div>
+
+                    <!-- Form Row 2: Task Scoping Details -->
+                    <div class="form-group">
+                        <label for="task-description">Work Delivery Description</label>
+                        <textarea id="task-description" rows="3" placeholder="Describe the feature or ticket built..." required></textarea>
+                    </div>
+
+                    <!-- Form Row 3: Scope Classification Segment (Crucial for JavaScript Scope Creep Sorting) -->
+                    <div class="form-group">
+                        <label>Contract Scope Alignment</label>
+                        <div class="radio-card-group">
+                            <label class="radio-card">
+                                <input type="radio" name="scope-alignment" value="in-scope" checked>
+                                <div class="radio-content">
+                                    <strong>In-Scope Task</strong>
+                                    <span>Part of original agreement layout</span>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="scope-alignment" value="out-of-scope">
+                                <div class="radio-content">
+                                    <strong>Out-of-Scope (Creep)</strong>
+                                    <span>Extra request / Unbilled addition</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary-action" id="submit-log-btn">Commit Hours to Ledger</button>
+                </form>
+            </section>
+
+            <!-- Right Side: Live Auditing Ledger Display -->
+            <section class="ledger-panel">
+                <div class="panel-header">
+                    <h2>Project Resource Ledger</h2>
+                    <div class="ledger-controls">
+                        <!-- Dropdown filter for the prioritize/order requirement -->
+                        <select id="ledger-filter">
+                            <option value="all">Show All Records</option>
+                            <option value="leakage">Show Leakage Warnings Only</option>
+                            <option value="creep">Show Scope Creep Only</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="ledger-table">
+                        <thead>
+                            <tr>
+                                <th>Task Details</th>
+                                <th>Scope</th>
+                                <th class="text-right">Hours</th>
+                                <th class="text-right">Cost Rate</th>
+                                <th class="text-right">Total Cost</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <!-- Target this element in JS to append rows dynamically -->
+                        <tbody id="ledger-rows-container">
+                            <!-- Baseline Fallback State -->
+                            <tr id="empty-ledger-state">
+                                <td colspan="6" class="table-empty-message">
+                                    No resource records logged for this contract yet. Use the intake panel to commit data.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+</body>
+</html>
